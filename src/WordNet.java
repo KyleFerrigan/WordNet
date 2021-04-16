@@ -6,7 +6,7 @@ public class WordNet {
     public WordNet(String synsets, String hypernyms){
         if (synsets == null) throw new java.lang.IllegalArgumentException("synsets is null");
         if (hypernyms == null) throw new java.lang.IllegalArgumentException("hypernyms is null");
-        Scanner scan = new Scanner();
+        Scanner scan = new Scanner(System.in);
 
     }
 

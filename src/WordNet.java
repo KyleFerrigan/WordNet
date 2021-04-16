@@ -57,13 +57,13 @@ public class WordNet {
     // the set of all WordNet nouns
     public Iterable<String> nouns(){
         ArrayList nouns = new ArrayList();
-        String[] nounsSplitTemp;
+        String[] nounsSplitTemp;//temporary data variable to
         for(int i = 0; i<hMapSys.size(); i++){//iterates through whole synsets hashmap
-            Iterator<String> itr = ((Bag<String>)hMapSys.get(i)).iterator();
-            nounsSplitTemp = itr.next().split(" ");//todo split based on spaces
-            for (int j = 0; j<nounsSplitTemp.length; j++){
-                if (!nouns.contains(nounsSplitTemp[j])){// checks against arraylist to only get unique nouns
-                    nouns.add(nounsSplitTemp[j]);//add to arraylist for easy checking
+            Iterator<String> itr = ((Bag<String>)hMapSys.get(i)).iterator();//get iterator of the bag in order to retrieve data
+            nounsSplitTemp = itr.next().split(" ");//split nouns based on spaces
+            for (int j = 0; j<nounsSplitTemp.length; j++){//for the amount of nouns in this key
+                if (!nouns.contains(nounsSplitTemp[j])){//check against current nouns to only get unique nouns
+                    nouns.add(nounsSplitTemp[j]);//add to unique nouns
                 }
             }
         }
@@ -93,9 +93,12 @@ public class WordNet {
     // unit testing (required)
     public static void main(String[] args) throws FileNotFoundException {
         WordNet test = new WordNet("test","test");
-        Iterator itr =  test.nouns().iterator();
-        for(int i = 0; i<test.hMapHyp.size(); i++) {
+        /*Iterator itr =  test.nouns().iterator();
+        int count = 0;
+        while(itr.hasNext()) {
+            count++;
             System.out.println(itr.next());
         }
+        System.out.println("count" + count);*/
     }
 }

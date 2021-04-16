@@ -13,13 +13,14 @@ public class WordNet {
         File hypernymsFile = new File("Data/hypernyms.txt");
 
         Scanner scan = new Scanner(sysnetsFile);
-        String nextLineCached; // Holds next line without iterating more than once
+        String nextLineCache; // Holds next line without iterating more than once
         String[] splitCache; //holds string from split function
         while (scan.hasNextLine()){
-            nextLineCached = scan.nextLine(); //store next up so it can be used multiple times without iterating
-            splitCache = new String[nextLineCached.split(",").length];//store length
-            splitCache = nextLineCached.split(",");
+            nextLineCache = scan.nextLine(); //store next up so it can be used multiple times without iterating
+            splitCache = new String[nextLineCache.split(",").length];//store length
+            splitCache = nextLineCache.split(",");
             Bag bagTemp = new Bag<String>();
+
             bagTemp.add(splitCache[1]);
             bagTemp.add(splitCache[2]);
             hMapSys.put(splitCache[0],bagTemp);
@@ -27,7 +28,14 @@ public class WordNet {
 
         scan = new Scanner(hypernymsFile);
         while (scan.hasNextLine()){
-            //todo parse hypernym
+            nextLineCache = scan.nextLine(); //store next up so it can be used multiple times without iterating
+            splitCache = new String[nextLineCache.split(",").length];//store length
+            splitCache = nextLineCache.split(",");
+            Bag bagTemp = new Bag<Integer>();
+
+            bagTemp.add(splitCache[1]);
+            bagTemp.add(splitCache[2]);
+            hMapSys.put(splitCache[0],bagTemp);
         }
     }
 

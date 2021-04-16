@@ -70,6 +70,7 @@ public class Digraph {
      * @throws IllegalArgumentException if the number of vertices or edges is negative
      * @throws IllegalArgumentException if the input stream is in the wrong format
      */
+
     public Digraph(Scanner input) {
         if (input == null) throw new IllegalArgumentException("argument is null");
         

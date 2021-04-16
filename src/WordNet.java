@@ -40,10 +40,13 @@ public class WordNet {
             hMapSys.put(Integer.parseInt(splitCache[0]),bagTemp);
         }
 
+        //populate digraph
         DAG = new Digraph(hMapHyp.size());//Assumed sysnet and hypernym are the same size
-
-
-
+        for(int i = 0; i<hMapSys.size(); i++){
+            for (int j = 0; j<((Bag<Integer>)hMapHyp.get(i)).size(); j++){
+                DAG.addEdge(i,((Iterator<Integer>)(hMapHyp.get(i))).next().intValue());
+            }
+        }
     }
 
     // the set of all WordNet nouns

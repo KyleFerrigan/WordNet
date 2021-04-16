@@ -23,7 +23,7 @@ public class WordNet {
 
             bagTemp.add(splitCache[1]);
             bagTemp.add(splitCache[2]);
-            hMapSys.put(splitCache[0],bagTemp);
+            hMapSys.put(Integer.parseInt(splitCache[0]),bagTemp);
         }
 
         scan = new Scanner(hypernymsFile);
@@ -33,10 +33,12 @@ public class WordNet {
             splitCache = nextLineCache.split(",");
             Bag bagTemp = new Bag<Integer>();
 
-            bagTemp.add(splitCache[1]);
-            bagTemp.add(splitCache[2]);
-            hMapSys.put(splitCache[0],bagTemp);
+            bagTemp.add(Integer.parseInt(splitCache[1]));
+            bagTemp.add(Integer.parseInt(splitCache[2]));
+            hMapSys.put(Integer.parseInt(splitCache[0]),bagTemp);
         }
+
+
     }
 
     // the set of all WordNet nouns

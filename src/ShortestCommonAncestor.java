@@ -3,7 +3,7 @@ public class ShortestCommonAncestor {
     // constructor takes a rooted DAG as argument
     public ShortestCommonAncestor(Digraph G){
         if (G == null) throw new java.lang.IllegalArgumentException("Digraph is null");
-        this.DAG = G;
+        this.DAG = new Digraph(G);
     }
     // length of shortest ancestral path between v and w
     public int length(int v, int w){

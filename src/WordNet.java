@@ -11,7 +11,7 @@ public class WordNet {
         if (synsets == null) throw new java.lang.IllegalArgumentException("synsets is null");
         if (hypernyms == null) throw new java.lang.IllegalArgumentException("hypernyms is null");
 
-        File  sysnetsFile = new File("Data/sysnets.txt");
+        File  sysnetsFile = new File("Data/synsets.txt");
         File hypernymsFile = new File("Data/hypernyms.txt");
 
         Scanner scan = new Scanner(sysnetsFile);
@@ -35,16 +35,18 @@ public class WordNet {
             splitCache = nextLineCache.split(",");
             Bag bagTemp = new Bag<Integer>();
 
-            bagTemp.add(Integer.parseInt(splitCache[1]));
-            bagTemp.add(Integer.parseInt(splitCache[2]));
+            for (int i = 1; i<splitCache.length; i++){
+                bagTemp.add(Integer.parseInt(splitCache[i]));
+            }
             hMapSys.put(Integer.parseInt(splitCache[0]),bagTemp);
         }
 
         //populate digraph
-        DAG = new Digraph(hMapHyp.size());//Assumed sysnet and hypernym are the same size
+        DAG = new Digraph(hMapSys.size());//Assumed sysnet and hypernym are the same size
         for(int i = 0; i<hMapSys.size(); i++){
-            for (int j = 0; j<((Bag<Integer>)hMapHyp.get(i)).size(); j++){
-                DAG.addEdge(i,((Iterator<Integer>)(hMapHyp.get(i))).next().intValue());
+            Iterator itr = ((Iterable<Integer>)((Bag<Integer>)(hMapSys.get(i)))).iterator();
+            for (int j = 0; j<((Bag<Integer>)hMapSys.get(i)).size(); j++){ //Depending on size of bag, iterate
+                DAG.addEdge(i,(int)itr.next()); //add as many edges as there are todo iterator might not work right without instanciating earlier between i and j loop
             }
         }
     }
@@ -75,7 +77,7 @@ public class WordNet {
     }
 
     // unit testing (required)
-    public static void main(String[] args){
-
+    public static void main(String[] args) throws FileNotFoundException {
+        WordNet test = new WordNet("test","test");
     }
 }

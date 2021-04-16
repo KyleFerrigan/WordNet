@@ -4,6 +4,8 @@ import java.io.*;
 public class WordNet {
     private HashMap hMapSys = new HashMap<Integer, Bag<String>>();
     private HashMap hMapHyp = new HashMap<Integer, Bag<Integer>>();
+    private Digraph DAG;
+
     // constructor takes the name of the two input files
     public WordNet(String synsets, String hypernyms) throws FileNotFoundException {
         if (synsets == null) throw new java.lang.IllegalArgumentException("synsets is null");
@@ -37,6 +39,9 @@ public class WordNet {
             bagTemp.add(Integer.parseInt(splitCache[2]));
             hMapSys.put(Integer.parseInt(splitCache[0]),bagTemp);
         }
+
+        DAG = new Digraph(hMapHyp.size());//Assumed sysnet and hypernym are the same size
+
 
 
     }

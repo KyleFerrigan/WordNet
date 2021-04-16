@@ -1,13 +1,26 @@
 import java.util.*;
+import java.io.*;
 
 public class WordNet {
     HashMap hMap = new HashMap<Integer, String>();
+
     // constructor takes the name of the two input files
-    public WordNet(String synsets, String hypernyms){
+    public WordNet(String synsets, String hypernyms) throws FileNotFoundException {
         if (synsets == null) throw new java.lang.IllegalArgumentException("synsets is null");
         if (hypernyms == null) throw new java.lang.IllegalArgumentException("hypernyms is null");
-        Scanner scan = new Scanner(System.in);
 
+        File  sysnetsFile = new File("/Data/sysnets.txt");
+        File hypernymsFile = new File("/Data/hypernyms.txt");
+
+        Scanner scan = new Scanner(sysnetsFile);
+        while (scan.hasNextLine()){
+            //todo parse sysnet
+        }
+
+        scan = new Scanner(hypernymsFile);
+        while (scan.hasNextLine()){
+            //todo parse hypernym
+        }
     }
 
     // the set of all WordNet nouns

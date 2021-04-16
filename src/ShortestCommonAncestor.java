@@ -1,5 +1,6 @@
 public class ShortestCommonAncestor {
     private Digraph DAG; // Directed Acylic Graph
+
     // constructor takes a rooted DAG as argument
     public ShortestCommonAncestor(Digraph G){
         if (G == null) throw new java.lang.IllegalArgumentException("Digraph is null");
@@ -10,6 +11,8 @@ public class ShortestCommonAncestor {
         // Check to see if either vertex are in range, throw exception if they are outside the prescribed range
         if (v < 0 || v > DAG.V()) throw new java.lang.IllegalArgumentException("v is out of range");
         if (w < 0 || w > DAG.V()) throw new java.lang.IllegalArgumentException("w is out of range");
+        //todo breadth first search
+
         return -1; //todo change
     }
     // a shortest common ancestor of vertices v and w

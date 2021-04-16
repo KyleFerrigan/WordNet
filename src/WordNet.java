@@ -20,11 +20,14 @@ public class WordNet {
         while (scan.hasNextLine()){
             nextLineCache = scan.nextLine(); //store next up so it can be used multiple times without iterating
             splitCache = new String[nextLineCache.split(",").length];//store length
+
             splitCache = nextLineCache.split(",");
+
             Bag bagTemp = new Bag<String>();
 
-            bagTemp.add(splitCache[1]);
             bagTemp.add(splitCache[2]);
+            bagTemp.add(splitCache[1]);
+
             hMapSys.put(Integer.parseInt(splitCache[0]),bagTemp);
         }
 
@@ -54,10 +57,14 @@ public class WordNet {
     // the set of all WordNet nouns
     public Iterable<String> nouns(){
         ArrayList nouns = new ArrayList();
+        String[] nounsSplitTemp;
         for(int i = 0; i<hMapSys.size(); i++){//iterates through whole synsets hashmap
-            if (!nouns.contains(hMapSys.get(i))){//todo checks against arraylist to only get unique nouns
-                Iterator<String> itr = ((Bag<String>)hMapSys.get(i)).iterator();
-                nouns.add(itr.next());//add to arraylist for easy checking
+            Iterator<String> itr = ((Bag<String>)hMapSys.get(i)).iterator();
+            nounsSplitTemp = itr.next().split(" ");//todo split based on spaces
+            for (int j = 0; j<nounsSplitTemp.length; j++){
+                if (!nouns.contains(nounsSplitTemp[j])){// checks against arraylist to only get unique nouns
+                    nouns.add(nounsSplitTemp[j]);//add to arraylist for easy checking
+                }
             }
         }
         return (Iterable<String>) nouns;

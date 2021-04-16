@@ -1,6 +1,6 @@
 public class ShortestCommonAncestor {
     private Digraph DAG; // Directed Acylic Graph
-
+    private BreadthFirstDirectedPaths dag1, dag2;
     // constructor takes a rooted DAG as argument
     public ShortestCommonAncestor(Digraph G){
         if (G == null) throw new java.lang.IllegalArgumentException("Digraph is null");
@@ -61,14 +61,50 @@ public class ShortestCommonAncestor {
         // Check to see if either subset points to null
         if (subsetA == null) throw new java.lang.IllegalArgumentException("subsetA is null");
         if (subsetB == null) throw new java.lang.IllegalArgumentException("subsetB is null");
-        return -1; //todo change
+        
+        // Create two graphs for the two subsets
+        dag1 = new BreadthFirstDirectedPaths(DAG, subsetA);
+        dag2 = new BreadthFirstDirectedPaths(DAG, subsetB);
+        
+        int vertex = DAG.V();
+        int minLength = Integer.MAX_VALUE;
+        // Go through the subsets and measure out the length, update the length whenever the distance (edges) to the two graphs are greater than the length
+        for (int i = 0; i < vertex; i++){
+            if (dag1.hasPathTo(i) && dag2.hasPathTo(i)){
+                if (minLength > dag1.distTo(i) + dag2.distTo(i)) {
+                    minLength = dag1.distTo(i) + dag2.distTo(i);
+                }
+            }
+        }
+        // If the length never changed, then the vertex of the subsets are its own ancestor, otherwise return the length
+        if (minLength == Integer.MAX_VALUE) return -1;
+        return minLength;
     }
     // a shortest common ancestor of vertex subsets A and B
     public int ancestorSubset(Iterable<Integer> subsetA, Iterable<Integer> subsetB){
-        // Check to see if either subset points to null
+        // Check to see if either subset point to null
         if (subsetA == null) throw new java.lang.IllegalArgumentException("subsetA is null");
         if (subsetB == null) throw new java.lang.IllegalArgumentException("subsetB is null");
-        return -1; //todo change
+                  
+        // Create two graphs for the two subsets
+        dag1 = new BreadthFirstDirectedPaths(DAG, subsetA);
+        dag2 = new BreadthFirstDirectedPaths(DAG, subsetB);
+        
+        int vertex = DAG.V();
+        int minLength = Integer.MAX_VALUE;
+        int result = -1;
+        // Go through the subsets and measure out the length, update the length whenever the distance (edges) to the two graphs are greater than the length
+        // Store the number into result
+        for (int i = 0; i < vertex; i++){
+            if (dag1.hasPathTo(i) && dag2.hasPathTo(i)){
+                if (minLength > dag1.distTo(i) + dag2.distTo(i)){
+                    minLength = dag1.distTo(i) + dag2.distTo(i);
+                    result = i;
+                }
+            }
+        }
+        // If the length never changed, then the vertex of the subsets are its own ancestor (-1), otherwise it is the updated length
+        return result;
     }
     // unit testing (required)
     public static void main(String[] args){

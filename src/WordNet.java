@@ -53,7 +53,14 @@ public class WordNet {
 
     // the set of all WordNet nouns
     public Iterable<String> nouns(){
-        return null; //todo change
+        ArrayList nouns = new ArrayList();
+        for(int i = 0; i<hMapSys.size(); i++){//iterates through whole synsets hashmap
+            if (!nouns.contains(hMapSys.get(i))){//todo checks against arraylist to only get unique nouns
+                Iterator<String> itr = ((Bag<String>)hMapSys.get(i)).iterator();
+                nouns.add(itr.next());//add to arraylist for easy checking
+            }
+        }
+        return (Iterable<String>) nouns;
     }
 
     // is the word a WordNet noun?
@@ -79,5 +86,9 @@ public class WordNet {
     // unit testing (required)
     public static void main(String[] args) throws FileNotFoundException {
         WordNet test = new WordNet("test","test");
+        Iterator itr =  test.nouns().iterator();
+        for(int i = 0; i<test.hMapHyp.size(); i++) {
+            System.out.println(itr.next());
+        }
     }
 }

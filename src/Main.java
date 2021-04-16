@@ -5,7 +5,7 @@ import java.io.FileNotFoundException;
 
 public class Main {
     public static void main(String[] args) throws FileNotFoundException {
-        File inFile = new File("tinyDG.txt");
+        File inFile = new File("Data/tinyDG.txt");
         Scanner input = new Scanner(inFile);
         Digraph G = new Digraph(input);
 

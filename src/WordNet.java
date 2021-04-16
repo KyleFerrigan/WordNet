@@ -9,8 +9,8 @@ public class WordNet {
         if (synsets == null) throw new java.lang.IllegalArgumentException("synsets is null");
         if (hypernyms == null) throw new java.lang.IllegalArgumentException("hypernyms is null");
 
-        File  sysnetsFile = new File("/Data/sysnets.txt");
-        File hypernymsFile = new File("/Data/hypernyms.txt");
+        File  sysnetsFile = new File("Data/sysnets.txt");
+        File hypernymsFile = new File("Data/hypernyms.txt");
 
         Scanner scan = new Scanner(sysnetsFile);
         while (scan.hasNextLine()){

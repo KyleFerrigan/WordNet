@@ -1,7 +1,8 @@
 public class ShortestCommonAncestor {
+    private Digraph graph;
     // constructor takes a rooted DAG as argument
     public ShortestCommonAncestor(Digraph G){
-
+        graph = new Digraph(G);
     }
     // length of shortest ancestral path between v and w
     public int length(int v, int w){

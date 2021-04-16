@@ -3,7 +3,7 @@ import java.io.*;
 
 public class WordNet {
     private HashMap hMapSys = new HashMap<Integer, Bag<String>>();
-    private HashMap hMapHyp = new HashMap<Integer, Bag<String>>();
+    private HashMap hMapHyp = new HashMap<Integer, Bag<Integer>>();
     // constructor takes the name of the two input files
     public WordNet(String synsets, String hypernyms) throws FileNotFoundException {
         if (synsets == null) throw new java.lang.IllegalArgumentException("synsets is null");
@@ -13,16 +13,16 @@ public class WordNet {
         File hypernymsFile = new File("Data/hypernyms.txt");
 
         Scanner scan = new Scanner(sysnetsFile);
-        String nextUp;
-        String[] temp;
+        String nextLineCached; // Holds next line without iterating more than once
+        String[] splitCache; //holds string from split function
         while (scan.hasNextLine()){
-            nextUp = scan.nextLine(); //store next up so it can be used multiple times without iterating
-            temp = new String[nextUp.split(",").length];//store length
-            temp = nextUp.split(",");
+            nextLineCached = scan.nextLine(); //store next up so it can be used multiple times without iterating
+            splitCache = new String[nextLineCached.split(",").length];//store length
+            splitCache = nextLineCached.split(",");
             Bag bagTemp = new Bag<String>();
-            bagTemp.add(temp[1]);
-            bagTemp.add(temp[2]);
-            hMapSys.put(temp[0],bagTemp);
+            bagTemp.add(splitCache[1]);
+            bagTemp.add(splitCache[2]);
+            hMapSys.put(splitCache[0],bagTemp);
         }
 
         scan = new Scanner(hypernymsFile);

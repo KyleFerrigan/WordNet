@@ -38,14 +38,14 @@ public class WordNet {
             for (int i = 1; i<splitCache.length; i++){
                 bagTemp.add(Integer.parseInt(splitCache[i]));
             }
-            hMapSys.put(Integer.parseInt(splitCache[0]),bagTemp);
+            hMapHyp.put(Integer.parseInt(splitCache[0]),bagTemp);
         }
 
         //populate digraph
-        DAG = new Digraph(hMapSys.size());//Assumed sysnet and hypernym are the same size
-        for(int i = 0; i<hMapSys.size(); i++){
-            Iterator itr = ((Iterable<Integer>)((Bag<Integer>)(hMapSys.get(i)))).iterator();
-            for (int j = 0; j<((Bag<Integer>)hMapSys.get(i)).size(); j++){ //Depending on size of bag, iterate
+        DAG = new Digraph(hMapHyp.size());//Assumed sysnet and hypernym are the same size
+        for(int i = 0; i<hMapHyp.size(); i++){
+            Iterator itr = ((Iterable<Integer>)((Bag<Integer>)(hMapHyp.get(i)))).iterator();
+            for (int j = 0; j<((Bag<Integer>)hMapHyp.get(i)).size(); j++){ //Depending on size of bag, iterate
                 DAG.addEdge(i,(int)itr.next()); //add as many edges as there are todo iterator might not work right without instanciating earlier between i and j loop
             }
         }

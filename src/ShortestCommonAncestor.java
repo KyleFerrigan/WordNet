@@ -1,13 +1,18 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
+
 public class ShortestCommonAncestor {
     private Digraph DAG; // Directed Acylic Graph
     private BreadthFirstDirectedPaths dag1, dag2;
-    // constructor takes a rooted DAG as argument
-    public ShortestCommonAncestor(Digraph G){
+   // constructor takes a rooted DAG as argument
+   public ShortestCommonAncestor(Digraph G){
         if (G == null) throw new java.lang.IllegalArgumentException("Digraph is null");
-        this.DAG = new Digraph(G);
-    }
-    // length of shortest ancestral path between v and w
-    public int length(int v, int w){
+        this.DAG = G;
+   }
+
+   // length of shortest ancestral path between v and w
+   public int length(int v, int w){
         // Check to see if either vertex are in range, throw exception if they are outside the prescribed range
         if (v < 0 || v > DAG.V()) throw new java.lang.IllegalArgumentException("v is out of range");
         if (w < 0 || w > DAG.V()) throw new java.lang.IllegalArgumentException("w is out of range");
@@ -29,9 +34,10 @@ public class ShortestCommonAncestor {
         // If the length never changed, then the vertex is its own ancestor, otherwise return the length
         if (minLength == Integer.MAX_VALUE) return -1;
         return minLength;
-    }
-    // a shortest common ancestor of vertices v and w
-    public int ancestor(int v, int w){
+   }
+
+   // a shortest common ancestor of vertices v and w
+   public int ancestor(int v, int w){
         // Check to see if either vertex are in range, throw exception if they are outside the prescribed range
         if (v < 0 || v > DAG.V()) throw new java.lang.IllegalArgumentException("v is out of range");
         if (w < 0 || w > DAG.V()) throw new java.lang.IllegalArgumentException("w is out of range");
@@ -55,9 +61,10 @@ public class ShortestCommonAncestor {
         }
         // If the length never changed, then the vertex is its own ancestor (-1), otherwise it is the updated length
         return result;
-    }
-    // length of shortest ancestral path of vertex subsets A and B
-    public int lengthSubset(Iterable<Integer> subsetA, Iterable<Integer> subsetB){
+   }
+
+   // length of shortest ancestral path of vertex subsets A and B
+   public int lengthSubset(Iterable<Integer> subsetA, Iterable<Integer> subsetB){
         // Check to see if either subset points to null
         if (subsetA == null) throw new java.lang.IllegalArgumentException("subsetA is null");
         if (subsetB == null) throw new java.lang.IllegalArgumentException("subsetB is null");
@@ -79,9 +86,10 @@ public class ShortestCommonAncestor {
         // If the length never changed, then the vertex of the subsets are its own ancestor, otherwise return the length
         if (minLength == Integer.MAX_VALUE) return -1;
         return minLength;
-    }
-    // a shortest common ancestor of vertex subsets A and B
-    public int ancestorSubset(Iterable<Integer> subsetA, Iterable<Integer> subsetB){
+   }
+
+   // a shortest common ancestor of vertex subsets A and B
+   public int ancestorSubset(Iterable<Integer> subsetA, Iterable<Integer> subsetB){
         // Check to see if either subset point to null
         if (subsetA == null) throw new java.lang.IllegalArgumentException("subsetA is null");
         if (subsetB == null) throw new java.lang.IllegalArgumentException("subsetB is null");
@@ -105,9 +113,22 @@ public class ShortestCommonAncestor {
         }
         // If the length never changed, then the vertex of the subsets are its own ancestor (-1), otherwise it is the updated length
         return result;
-    }
-    // unit testing (required)
-    public static void main(String[] args){
+   }
 
+   // unit testing (required)
+   public static void main(String[] args) throws FileNotFoundException{
+       File inFile = new File("data/digraph1.txt.");
+       Scanner input = new Scanner(inFile);
+       Digraph G = new Digraph(input);
+       
+       ShortestCommonAncestor sca = new ShortestCommonAncestor(G);
+       Scanner input1 = new Scanner(System.in);
+       while (input1.hasNext()){
+           int v = input1.nextInt();
+           int w = input1.nextInt();
+           int length = sca.length(v, w);
+           int ancestor = sca.ancestor(v, w);
+           System.out.printf("length = %d, ancestor = %d\n", length, ancestor);
+       }
     }
 }

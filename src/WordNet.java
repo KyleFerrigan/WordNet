@@ -12,10 +12,10 @@ public class WordNet {
         if (synsets == null) throw new java.lang.IllegalArgumentException("synsets is null");
         if (hypernyms == null) throw new java.lang.IllegalArgumentException("hypernyms is null");
 
-        File  sysnetsFile = new File("Data/synsets.txt");
-        File hypernymsFile = new File("Data/hypernyms.txt");
+        File  synsetsFile = new File(synsets);
+        File hypernymsFile = new File(hypernyms);
 
-        Scanner scan = new Scanner(sysnetsFile);
+        Scanner scan = new Scanner(synsetsFile);
         String nextLineCache; // Holds next line without iterating more than once
         String[] splitCache; //holds string from split function
         while (scan.hasNextLine()){
@@ -81,7 +81,7 @@ public class WordNet {
         }
         Iterator itr = nounCache.iterator();
         while(itr.hasNext()){
-            if (itr.next() == word){
+            if (itr.next().toString().equals(word)){
                 return true;
             }
         }
@@ -104,14 +104,14 @@ public class WordNet {
 
     // unit testing (required)
     public static void main(String[] args) throws FileNotFoundException {
-        WordNet test = new WordNet("test","test");
+        WordNet test = new WordNet("Data/synsets.txt","Data/hypernyms.txt");
         /*Iterator itr =  test.nouns().iterator();
         int count = 0;
         while(itr.hasNext()) {
             count++;
             System.out.println(itr.next());
         }
-        System.out.println("count" + count);*/
-        System.out.println(test.isNoun("Parvati"));
+        System.out.println("Unique Words: " + count);*/
+        //System.out.println(test.isNoun("Parvati"));
     }
 }

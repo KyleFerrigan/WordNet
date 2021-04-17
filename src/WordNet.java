@@ -5,6 +5,7 @@ public class WordNet {
     private HashMap hMapSys = new HashMap<Integer, Bag<String>>();
     private HashMap hMapHyp = new HashMap<Integer, Bag<Integer>>();
     private Digraph DAG;
+    private Iterable<String> nounCache;
 
     // constructor takes the name of the two input files
     public WordNet(String synsets, String hypernyms) throws FileNotFoundException {
@@ -67,13 +68,24 @@ public class WordNet {
                 }
             }
         }
+        nounCache = nouns;
         return (Iterable<String>) nouns;
     }
 
     // is the word a WordNet noun?
     public boolean isNoun(String word){
         if (word == null) throw new java.lang.IllegalArgumentException(word + " is null");
-        return false;//todo change
+
+        if (nounCache == null){//if cached, skip re-running nouns
+            nouns();
+        }
+        Iterator itr = nounCache.iterator();
+        while(itr.hasNext()){
+            if (itr.next() == word){
+                return true;
+            }
+        }
+        return false;
     }
 
     // a synset (second field of synsets.txt) that is a shortest common ancestor // of noun1 and noun2 (defined below)
@@ -100,5 +112,6 @@ public class WordNet {
             System.out.println(itr.next());
         }
         System.out.println("count" + count);*/
+        System.out.println(test.isNoun("Parvati"));
     }
 }

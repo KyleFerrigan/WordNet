@@ -1,12 +1,16 @@
+import java.io.File;
+import java.util.Scanner;
+import java.io.FileNotFoundException;
+
 public class Outcast {
     private WordNet WD;
-    // constructor takes a WordNet object
-    public Outcast(WordNet wordnet){
-        this.WD = wordnet;
-    }
-    
-    // given an array of WordNet nouns, return an outcast
-    public String outcast(String[] nouns){
+   // constructor takes a WordNet object
+   public Outcast(WordNet wordnet){
+       this.WD = wordnet;
+   }
+
+   // given an array of WordNet nouns, return an outcast
+   public String outcast(String[] nouns){
        String outCast = null; //
        int maximum = Integer.MIN_VALUE;
        // Go through the array of nouns
@@ -22,10 +26,10 @@ public class Outcast {
        }
        return outCast;
    }
-    
-    // test client (see below)
-    public static void main(String[] args){
-       WordNet test = new WordNet("data/synsets.txt","data/hypernyms.txt");
+
+   // test client (see below)
+   public static void main(String[] args) throws FileNotFoundException{
+       WordNet test = new WordNet("data/synsets.txt","data/hypernyms.txt"); //create new WordNet
        Outcast cast = new Outcast(test);
        for (int i = 0; i < 3; i++){
            Scanner input = new Scanner(System.in);

@@ -47,11 +47,10 @@ and we used a hash table as it is fast access and should have minimal collisions
  **************************************************************************** */
 
 Description:
-
-
+We are calling Digraph.java for the immutable Directed Acylic Graph. Because the Digraph updates the indegrees and adjacency lists, it will return the a deep copy of the specificed graph so that we only interact with the copy for the shorest common ancestor between vertices.
 
 Order of growth of running time:
-
+Big O (V + E)
 
 /* *****************************************************************************
  *  Describe concisely your algorithm to compute the shortest common ancestor
@@ -69,18 +68,18 @@ Order of growth of running time:
  **************************************************************************** */
 
 Description:
-
+We used breadth first directed paths to create the graphs for the directed acylic graph comparison. By measuring the distance between vertices, we can determine the length and ancestor of the vertices.
 
                                  running time
 method                  best case            worst case
 --------------------------------------------------------
-length()
+length()               O (V)                 O (V + E)
 
-ancestor()
+ancestor()             O (V)                 O (V + E)
 
-lengthSubset()
+lengthSubset()         O (V)                 O (V + E)
 
-ancestorSubset()
+ancestorSubset()       O (V)                 O (V + E)
 
 
 

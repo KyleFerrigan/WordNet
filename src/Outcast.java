@@ -25,6 +25,25 @@ public class Outcast {
     
     // test client (see below)
     public static void main(String[] args){
-
-    }
+       WordNet test = new WordNet("data/synsets.txt","data/hypernyms.txt");
+       Outcast cast = new Outcast(test);
+       for (int i = 0; i < 3; i++){
+           Scanner input = new Scanner(System.in);
+           System.out.print("Enter the file name: ");
+           String fileName = input.nextLine();
+           System.out.print("Enter the file size: ");
+           int fileSize = input.nextInt();
+           
+           File inFile = new File(fileName);
+           Scanner input1 = new Scanner(inFile);
+           String[] nouns = new String[fileSize];
+           
+           int j = 0;
+           while(input1.hasNextLine()){
+               nouns[j] = input1.nextLine();
+               j++;
+           }
+           System.out.println(fileName + ": " + cast.outcast(nouns));
+       }
+   }
 }

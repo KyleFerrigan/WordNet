@@ -22,14 +22,11 @@ public class WordNet {
         while (scan.hasNextLine()){
             nextLineCache = scan.nextLine(); //store next up so it can be used multiple times without iterating
             splitCache = new String[nextLineCache.split(",").length];//store length
-
             splitCache = nextLineCache.split(",");//split based off commas
 
             Bag bagTemp = new Bag<String>();
-
             bagTemp.add(splitCache[2]);//Description
             bagTemp.add(splitCache[1]);//Nouns
-
             hMapSys.put(Integer.parseInt(splitCache[0]),bagTemp);//put key and bag into hMapSys
         }
 
@@ -58,6 +55,10 @@ public class WordNet {
 
     // the set of all WordNet nouns
     public Iterable<String> nouns(){
+        if (nounCache != null){//if already called upon earlier just pull from cache to save a ton of time
+            return nounCache;
+        }
+
         ArrayList nouns = new ArrayList();
         String[] nounsSplitTemp;//temporary data variable to
         for(int i = 0; i<hMapSys.size(); i++){//iterates through whole synsets hashmap
@@ -76,18 +77,6 @@ public class WordNet {
     // is the word a WordNet noun?
     public boolean isNoun(String word){
         if (word == null) throw new java.lang.IllegalArgumentException(word + " is null");
-        //todo delete commented out code below when absolutely certain we dont need it
-       /* if (nounCache == null){//if cached, skip re-running nouns
-            nouns();
-        }
-        Iterator itr = nounCache.iterator();
-        while(itr.hasNext()){
-            if (itr.next().toString().equals(word)){
-                return true;
-            }
-        }
-        return false;*/
-
         String[] splitCache;
         for (int i = 0; i<hMapSys.size(); i++){//for the size of the hMapSys
             Iterator itr = ((Bag<String>)hMapSys.get(i)).iterator();//Get all nouns in location i
@@ -109,7 +98,6 @@ public class WordNet {
         if (noun1 == null) throw new java.lang.IllegalArgumentException(noun1 + " is null");
         if (noun2 == null) throw new java.lang.IllegalArgumentException(noun2 + " is null");
         if (!isNoun(noun1)||!isNoun(noun2)) throw new java.lang.IllegalStateException(noun1 + "or" + noun2 + "is not a noun");//error checking to make sure they are nouns
-
 
         //Find number associated with noun
         int noun1Num = -1;
@@ -198,6 +186,5 @@ public class WordNet {
             System.out.println(itr.next());
         }
         System.out.println("Unique Words: " + count);*/
-
     }
 }

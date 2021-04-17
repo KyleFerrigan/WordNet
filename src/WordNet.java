@@ -13,8 +13,8 @@ public class WordNet {
         if (synsets == null) throw new java.lang.IllegalArgumentException("synsets is null");
         if (hypernyms == null) throw new java.lang.IllegalArgumentException("hypernyms is null");
 
-        File  synsetsFile = new File(synsets);
-        File hypernymsFile = new File(hypernyms);
+        File  synsetsFile = new File(synsets);//New synsets file based off given path
+        File hypernymsFile = new File(hypernyms);//New hypernyms file based off given path
 
         Scanner scan = new Scanner(synsetsFile);
         String nextLineCache; // Holds next line without iterating more than once
@@ -23,27 +23,27 @@ public class WordNet {
             nextLineCache = scan.nextLine(); //store next up so it can be used multiple times without iterating
             splitCache = new String[nextLineCache.split(",").length];//store length
 
-            splitCache = nextLineCache.split(",");
+            splitCache = nextLineCache.split(",");//split based off commas
 
             Bag bagTemp = new Bag<String>();
 
-            bagTemp.add(splitCache[2]);
-            bagTemp.add(splitCache[1]);
+            bagTemp.add(splitCache[2]);//Description
+            bagTemp.add(splitCache[1]);//Nouns
 
-            hMapSys.put(Integer.parseInt(splitCache[0]),bagTemp);
+            hMapSys.put(Integer.parseInt(splitCache[0]),bagTemp);//put key and bag into hMapSys
         }
 
         scan = new Scanner(hypernymsFile);
         while (scan.hasNextLine()){
             nextLineCache = scan.nextLine(); //store next up so it can be used multiple times without iterating
             splitCache = new String[nextLineCache.split(",").length];//store length
-            splitCache = nextLineCache.split(",");
+            splitCache = nextLineCache.split(",");//split based off commas
             Bag bagTemp = new Bag<Integer>();
 
-            for (int i = 1; i<splitCache.length; i++){
+            for (int i = 1; i<splitCache.length; i++){//adds multiple thing into bag as there can be more than one element
                 bagTemp.add(Integer.parseInt(splitCache[i]));
             }
-            hMapHyp.put(Integer.parseInt(splitCache[0]),bagTemp);
+            hMapHyp.put(Integer.parseInt(splitCache[0]),bagTemp);//put key and bag into hMapHyp
         }
 
         //populate digraph
@@ -76,7 +76,7 @@ public class WordNet {
     // is the word a WordNet noun?
     public boolean isNoun(String word){
         if (word == null) throw new java.lang.IllegalArgumentException(word + " is null");
-
+        //todo delete commented out code below when absolutely certain we dont need it
        /* if (nounCache == null){//if cached, skip re-running nouns
             nouns();
         }
@@ -89,18 +89,16 @@ public class WordNet {
         return false;*/
 
         String[] splitCache;
-        for (int i = 0; i<hMapSys.size(); i++){
-            Iterator itr = ((Bag<String>)hMapSys.get(i)).iterator();
+        for (int i = 0; i<hMapSys.size(); i++){//for the size of the hMapSys
+            Iterator itr = ((Bag<String>)hMapSys.get(i)).iterator();//Get all nouns in location i
             while (itr.hasNext()){
                 String strCache = itr.next().toString();
-                splitCache = strCache.split(" ");
-                for(int j= 0; j<splitCache.length; j++){
-                    if (word.equals(splitCache[j])){//if equals to current string and hasnt already been found
+                splitCache = strCache.split(" ");//break up all nouns into individual nouns delimited on spaces
+                for(int j= 0; j<splitCache.length; j++){//go through individual nouns
+                    if (word.equals(splitCache[j])){//if word matches the noun
                         return true;
                     }
-
                 }
-
             }
         }
         return false;
@@ -110,18 +108,18 @@ public class WordNet {
     public String sca(String noun1, String noun2){
         if (noun1 == null) throw new java.lang.IllegalArgumentException(noun1 + " is null");
         if (noun2 == null) throw new java.lang.IllegalArgumentException(noun2 + " is null");
-        //if (isNoun(noun1)||isNoun(noun2)) throw new java.lang.IllegalStateException(noun1 + "or" + noun2 + "is not a noun"); //todo renable this before turning in
+        if (!isNoun(noun1)||!isNoun(noun2)) throw new java.lang.IllegalStateException(noun1 + "or" + noun2 + "is not a noun");//error checking to make sure they are nouns
 
 
         //Find number associated with noun
         int noun1Num = -1;
         int noun2Num = -1;
         String[] splitCache;
-        for (int i = 0; i<hMapSys.size(); i++){
+        for (int i = 0; i<hMapSys.size(); i++){//go through length of hMapsys
             Iterator itr = ((Bag<String>)hMapSys.get(i)).iterator();
             while (itr.hasNext()){
                 String strCache = itr.next().toString();
-                splitCache = strCache.split(" ");
+                splitCache = strCache.split(" ");//split into individual nouns
                 for(int j= 0; j<splitCache.length; j++){
                     if (noun1.equals(splitCache[j]) && noun1Num == -1){//if equals to current string and hasnt already been found
                         noun1Num = i;
@@ -153,13 +151,13 @@ public class WordNet {
     public int distance(String noun1, String noun2){
         if (noun1 == null) throw new java.lang.IllegalArgumentException(noun1 + " is null");
         if (noun2 == null) throw new java.lang.IllegalArgumentException(noun2 + " is null");
-        if (isNoun(noun1)||isNoun(noun2)) throw new java.lang.IllegalStateException(noun1 + "or" + noun2 + "is not a noun");//Error checking to make sure nouns exist
+        if (!isNoun(noun1)||!isNoun(noun2)) throw new java.lang.IllegalStateException(noun1 + "or" + noun2 + "is not a noun");//Error checking to make sure nouns exist
 
         //Find number associated with noun
         int noun1Num = -1;
         int noun2Num = -1;
         String[] splitCache;
-        for (int i = 0; i<hMapSys.size(); i++){
+        for (int i = 0; i<hMapSys.size(); i++){//go through whole hMapSys
             Iterator itr = ((Bag<String>)hMapSys.get(i)).iterator();
             while (itr.hasNext()){
                 String strCache = itr.next().toString();
@@ -187,7 +185,12 @@ public class WordNet {
 
     // unit testing (required)
     public static void main(String[] args) throws FileNotFoundException {
-        WordNet test = new WordNet("Data/synsets.txt","Data/hypernyms.txt");
+        WordNet test = new WordNet("Data/synsets.txt","Data/hypernyms.txt"); //create new WordNet
+        System.out.println(test.isNoun("Parvati")); //tests isnoun
+        System.out.println(test.sca("zymosis","fermentation")); //tests sca
+        System.out.println(test.distance("zymosis","fermentation")); //tests distance
+
+        //Below Tests Nouns(). Will take a good while (2 Mins)
         /*Iterator itr =  test.nouns().iterator();
         int count = 0;
         while(itr.hasNext()) {
@@ -195,7 +198,6 @@ public class WordNet {
             System.out.println(itr.next());
         }
         System.out.println("Unique Words: " + count);*/
-        System.out.println(test.isNoun("Parvati"));
-        System.out.println(test.sca("zymosis","fermentation"));
+
     }
 }

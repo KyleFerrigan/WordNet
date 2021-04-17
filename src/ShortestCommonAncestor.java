@@ -117,7 +117,7 @@ public class ShortestCommonAncestor {
 
    // unit testing (required)
    public static void main(String[] args) throws FileNotFoundException{
-       File inFile = new File("data/digraph1.txt.");
+       File inFile = new File("Data/digraph1.txt");
        Scanner input = new Scanner(inFile);
        Digraph G = new Digraph(input);
        

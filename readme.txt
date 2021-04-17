@@ -14,7 +14,7 @@
  *  Have you taken (part of) this course before:
  *  Kyle: No; Patrick: No
  *  Hours to complete assignment (optional):
- *
+ *  9 hours each
  ******************************************************************************/
 
 Programming Assignment 4: WordNet

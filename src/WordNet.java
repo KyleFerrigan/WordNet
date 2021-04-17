@@ -190,7 +190,7 @@ public class WordNet {
         System.out.println(test.sca("zymosis","fermentation")); //tests sca
         System.out.println(test.distance("zymosis","fermentation")); //tests distance
 
-        //Below Tests Nouns(). Will take a good while (2 Mins)
+        //Below Tests Nouns(). Will take a good while (2 Mins) todo turn on
         /*Iterator itr =  test.nouns().iterator();
         int count = 0;
         while(itr.hasNext()) {

@@ -1,13 +1,21 @@
-/* *****************************************************************************
- *  Name:     
- *  NetID:      
+/******************************************************************************
+ *  Name: Kyle Ferrigan
+ *  NetID: kbferrigan
+ *  Precept:  N/A
  *
- *  Partner Name:     
- *  Partner NetID:     
+ *  Partner Name: Patrick Galati
+ *  Partner NetID: pagalati
+ *  Partner Precept: N/A
  *
+ *  Operating system: Kyle: Win10; Patrick: Win10
+ *  Compiler: Kyle: JetBrains IntelliJ IDEA; Patrick: Netbeans
+ *  Text editor / IDE: Kyle: JetBrains IntelliJ IDEA; Patrick: Netbeans
+ *
+ *  Have you taken (part of) this course before:
+ *  Kyle: No; Patrick: No
  *  Hours to complete assignment (optional):
  *
- **************************************************************************** */
+ ******************************************************************************/
 
 Programming Assignment 4: WordNet
 

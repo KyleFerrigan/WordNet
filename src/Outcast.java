@@ -29,7 +29,7 @@ public class Outcast {
 
    // test client (see below)
    public static void main(String[] args) throws FileNotFoundException{
-       WordNet test = new WordNet("data/synsets.txt","data/hypernyms.txt"); //create new WordNet
+       WordNet test = new WordNet("Data/synsets.txt","Data/hypernyms.txt"); //create new WordNet
        Outcast cast = new Outcast(test);
        for (int i = 0; i < 3; i++){
            Scanner input = new Scanner(System.in);

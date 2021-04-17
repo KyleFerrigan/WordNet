@@ -6,6 +6,7 @@ public class WordNet {
     private HashMap hMapHyp = new HashMap<Integer, Bag<Integer>>();
     private Digraph DAG;
     private Iterable<String> nounCache;
+    ShortestCommonAncestor SCA;
 
     // constructor takes the name of the two input files
     public WordNet(String synsets, String hypernyms) throws FileNotFoundException {
@@ -88,11 +89,44 @@ public class WordNet {
         return false;
     }
 
-    // a synset (second field of synsets.txt) that is a shortest common ancestor // of noun1 and noun2 (defined below)
+    // a synset (second field of synsets.txt) that is a shortest common ancestor of noun1 and noun2 (defined below)
     public String sca(String noun1, String noun2){
         if (noun1 == null) throw new java.lang.IllegalArgumentException(noun1 + " is null");
         if (noun2 == null) throw new java.lang.IllegalArgumentException(noun2 + " is null");
-        return null;//todo change
+        //if (isNoun(noun1)||isNoun(noun2)) throw new java.lang.IllegalStateException(noun1 + "or" + noun2 + "is not a noun");
+
+
+        //Find number associated with noun
+        int noun1Num = -1;
+        int noun2Num = -1;
+        String[] splitCache;
+        for (int i = 0; i<hMapSys.size(); i++){
+            Iterator itr = ((Bag<String>)hMapSys.get(i)).iterator();
+            while (itr.hasNext()){
+                String strCache = itr.next().toString();
+                splitCache = strCache.split(" ");
+                for(int j= 0; j<splitCache.length; j++){
+                    if (noun1.equals(splitCache[j]) && noun1Num == -1){//if equals to current string and hasnt already been found
+                        noun1Num = i;
+                    }
+                    if (noun2.equals(splitCache[j]) && noun2Num == -1){//if equals to current string and hasnt already been found
+                        noun2Num = i;
+                    }
+                    if (noun2Num != -1 && noun1Num != -1){//if both found
+                        break; //break for efficiency no need to search further
+                    }
+                }
+
+            }
+        }
+
+        //Digraph distance using SCA
+        if (SCA == null){
+            SCA = new ShortestCommonAncestor(DAG);
+        }
+        System.out.println(SCA.length(noun1Num, noun2Num));
+
+        return null;
     }
 
     // distance between noun1 and noun2 (defined below)
@@ -113,5 +147,6 @@ public class WordNet {
         }
         System.out.println("Unique Words: " + count);*/
         //System.out.println(test.isNoun("Parvati"));
+        test.sca("zygomatic_arch","1850s");
     }
 }

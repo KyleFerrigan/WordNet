@@ -24,13 +24,14 @@ Programming Assignment 4: WordNet
  *  Describe concisely the data structure(s) you used to store the 
  *  information in synsets.txt. Why did you make this choice?
  **************************************************************************** */
-
+We used a hashtable with bags holding strings, You told us the bags were required in class, and we used a hash table as it is fast access and should have minimal collisions with the keys
 
 
 /* *****************************************************************************
  *  Describe concisely the data structure(s) you used to store the 
  *  information in hypernyms.txt. Why did you make this choice?
  **************************************************************************** */
+We used a hashtable with bags holding integers, You told us the bags were required in class, and we used a hash table as it is fast access and should have minimal collisions with the keys
 
 
 
@@ -84,7 +85,7 @@ ancestorSubset()
 /* *****************************************************************************
  *  Known bugs / limitations.
  **************************************************************************** */
-
+None that we are aware of
 
 /* *****************************************************************************
  *  Describe whatever help (if any) that you received.
@@ -92,18 +93,18 @@ ancestorSubset()
  *  include any help from people (including
  *  classmates and friends) and attribute them by name.
  **************************************************************************** */
-
+We did not receive any extra help on this assignment
 
 /* *****************************************************************************
  *  Describe any serious problems you encountered.                    
  **************************************************************************** */
-
+We did not really know how to initially approach ShortestCommonAncestor.java and especially WordNet.java as the datastructures needed was not clear cut.
 
 /* *****************************************************************************
  *  If you worked with a partner, give one
  *  sentence explaining what each of you contributed.
  **************************************************************************** */
-
+ We both helped each other out on all the code but Kyle primarily worked on Wordnet and Patrick primarily worked on ShortestCommonAncestor and Outcast
 
 
 

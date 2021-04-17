@@ -48,7 +48,7 @@ public class WordNet {
         for(int i = 0; i<hMapHyp.size(); i++){
             Iterator itr = ((Iterable<Integer>)((Bag<Integer>)(hMapHyp.get(i)))).iterator();
             for (int j = 0; j<((Bag<Integer>)hMapHyp.get(i)).size(); j++){ //Depending on size of bag, iterate
-                DAG.addEdge(i,(int)itr.next()); //add as many edges as there are todo iterator might not work right without instantiating earlier between i and j loop
+                DAG.addEdge(i,(int)itr.next()); //add as many edges as there are
             }
         }
     }
@@ -178,7 +178,7 @@ public class WordNet {
         System.out.println(test.sca("zymosis","fermentation")); //tests sca
         System.out.println(test.distance("zymosis","fermentation")); //tests distance
 
-        //Below Tests Nouns(). Will take a good while (2 Mins) todo turn on
+        //Below Tests Nouns(). Will take a good while (2 Mins) todo turn on before turning in
         /*Iterator itr =  test.nouns().iterator();
         int count = 0;
         while(itr.hasNext()) {

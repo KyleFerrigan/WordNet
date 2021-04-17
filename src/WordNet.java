@@ -174,16 +174,18 @@ public class WordNet {
     // unit testing (required)
     public static void main(String[] args) throws FileNotFoundException {
         WordNet test = new WordNet("Data/synsets.txt","Data/hypernyms.txt"); //create new WordNet
+
+        System.out.println(test.isNoun("Parvati")); //tests isnoun
+        System.out.println(test.sca("zymosis","fermentation")); //tests sca
+        System.out.println(test.distance("zymosis","fermentation")); //tests distance
+
         //Below Tests Nouns(). Will take a good while (2 Mins)
         Iterator itr =  test.nouns().iterator();
         int count = 0;
         while(itr.hasNext()) {
-            count++;
             System.out.println(itr.next());
+            count++;
         }
         System.out.println("Unique Words: " + count);
-        System.out.println(test.isNoun("Parvati")); //tests isnoun
-        System.out.println(test.sca("zymosis","fermentation")); //tests sca
-        System.out.println(test.distance("zymosis","fermentation")); //tests distance
     }
 }
